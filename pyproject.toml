@@ -69,4 +69,4 @@ warn_unused_configs = true
 disallow_untyped_defs = true
 
 [tool.vercel]
-entrypoint = "backend.app.main"
+entrypoint = "backend.app.main:app"
