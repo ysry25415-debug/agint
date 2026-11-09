@@ -316,7 +316,7 @@ class Supplier(Base):
 class SupplierProduct(Base):
     """Products from suppliers."""
 
-    __tablename__ = "suppliers_products"
+    __tablename__ = "supplier_products"
 
     id = Column(PG_UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     supplier_id = Column(PG_UUID(as_uuid=True), ForeignKey("suppliers.id"), nullable=False)

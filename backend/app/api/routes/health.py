@@ -5,10 +5,10 @@ Health check endpoints.
 from fastapi import APIRouter
 from datetime import datetime
 
-router = APIRouter(tags=["Health"])
+health_router = APIRouter(tags=["Health"])
 
 
-@router.get("/health", summary="Health check endpoint")
+@health_router.get("/health", summary="Health check endpoint")
 async def health_check():
     """Check application health status."""
     return {
@@ -18,7 +18,7 @@ async def health_check():
     }
 
 
-@router.get("/health/database", summary="Database health check")
+@health_router.get("/health/database", summary="Database health check")
 async def database_health():
     """Check database connection health."""
     # Database check would be implemented here
@@ -29,7 +29,7 @@ async def database_health():
     }
 
 
-@router.get("/health/redis", summary="Redis health check")
+@health_router.get("/health/redis", summary="Redis health check")
 async def redis_health():
     """Check Redis connection health."""
     # Redis check would be implemented here

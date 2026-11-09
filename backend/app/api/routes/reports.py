@@ -11,10 +11,10 @@ from ...models.base import DailyReport, AgentExecution
 from ...schemas.base import DailyReportOut, AgentExecutionOut, APIResponse
 from ...core.database import get_db
 
-router = APIRouter(tags=["Reports"])
+reports_router = APIRouter(tags=["Reports"])
 
 
-@router.get("/reports/today", response_model=APIResponse)
+@reports_router.get("/reports/today", response_model=APIResponse)
 async def get_todays_report(db: Session = Depends(get_db)):
     """Get today's daily report."""
     today = datetime.utcnow().date()
@@ -40,7 +40,7 @@ async def get_todays_report(db: Session = Depends(get_db)):
     )
 
 
-@router.get("/reports/history", response_model=APIResponse)
+@reports_router.get("/reports/history", response_model=APIResponse)
 async def get_report_history(
     days: int = Query(7, ge=1, le=30),
     db: Session = Depends(get_db),
@@ -56,7 +56,7 @@ async def get_report_history(
     )
 
 
-@router.get("/reports/{report_id}", response_model=APIResponse)
+@reports_router.get("/reports/{report_id}", response_model=APIResponse)
 async def get_report(report_id: int, db: Session = Depends(get_db)):
     """Get a specific report by ID."""
     report = db.get(DailyReport, report_id)
@@ -70,7 +70,7 @@ async def get_report(report_id: int, db: Session = Depends(get_db)):
     )
 
 
-@router.get("/agents/executions", response_model=APIResponse)
+@reports_router.get("/agents/executions", response_model=APIResponse)
 async def get_agent_executions(
     agent_type: Optional[str] = Query(None),
     status: Optional[str] = Query(None),

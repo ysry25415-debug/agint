@@ -10,10 +10,10 @@ from ...models.base import Source
 from ...schemas.base import SourceOut, APIResponse
 from ...core.database import get_db
 
-router = APIRouter(tags=["Sources"])
+sources_router = APIRouter(tags=["Sources"])
 
 
-@router.get("/sources", response_model=APIResponse)
+@sources_router.get("/sources", response_model=APIResponse)
 async def list_sources(
     type: Optional[str] = Query(None),
     active_only: bool = Query(True),
@@ -39,7 +39,7 @@ async def list_sources(
     )
 
 
-@router.get("/sources/{source_id}", response_model=APIResponse)
+@sources_router.get("/sources/{source_id}", response_model=APIResponse)
 async def get_source(source_id: int, db: Session = Depends(get_db)):
     """Get a specific source by ID."""
     source = db.get(Source, source_id)
@@ -53,7 +53,7 @@ async def get_source(source_id: int, db: Session = Depends(get_db)):
     )
 
 
-@router.get("/sources/status", response_model=APIResponse)
+@sources_router.get("/sources/status", response_model=APIResponse)
 async def get_source_status(db: Session = Depends(get_db)):
     """Get health status of all sources."""
     query = select(Source).where(Source.is_active == True)
