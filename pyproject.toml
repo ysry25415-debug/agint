@@ -1,0 +1,69 @@
+[project]
+name = "product-hunter-ai"
+version = "0.1.0"
+description = "Egyptian Electronics & Gadgets Market Intelligence Platform"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    "SQLAlchemy>=2.0.0",
+    "psycopg2-binary>=2.9.0",
+    "sqlmodel>=0.0.21",
+    "celery>=5.4.0",
+    "redis>=5.0.0",
+    "pydantic>=2.8.0",
+    "pydantic-settings>=2.3.0",
+    "httpx>=0.27.0",
+    "aiohttp>=3.10.0",
+    "pandas>=2.2.0",
+    "numpy>=2.0.0",
+    "python-dateutil>=2.9.0",
+    "python-dotenv>=1.0.0",
+    "tenacity>=9.0.0",
+    "python-telegram-bot>=21.0.0",
+    "openai>=1.50.0",
+    "anthropic>=0.4.0",
+    "aiolimiter>=1.1.0",
+    "orjson>=3.10.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.24.0",
+    "httpx>=0.27.0",
+    "black>=24.0.0",
+    "isort>=5.13.0",
+    "mypy>=1.10.0",
+    "ruff>=0.3.0",
+]
+
+[build-system]
+requires = ["setuptools>=69.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["backend", "worker"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
